@@ -31,6 +31,18 @@ jobs:
               run: |
                   npm install crypto-js --save --working-dir=encryption
 
+            - name: Install Java
+              uses: actions/setup-java@v2
+              with:
+                  distribution: "adopt"
+                  java-version: "11"
+
+            - name: Install org.json
+              run: |
+                  wget https://repo1.maven.org/maven2/org/json/json/20240303/json-20240303.jar
+                  mkdir lib
+                  mv json-20210307.jar lib/org.json.jar
+
             - name: Run tests
               run: |
                   php test.php

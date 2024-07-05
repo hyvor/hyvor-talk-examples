@@ -12,6 +12,8 @@ function runFile(string $filename)
         exec("node $filename", $output);
     } else if ($extension === 'py') {
         exec("python3 $filename", $output);
+    } else if ($extension === 'java') {
+        exec("java -cp .:lib/org.json.jar $filename", $output);
     } else {
         throw new Exception('Unsupported file type');
     }
@@ -36,6 +38,10 @@ function testEncryption()
 
         if (!isset($json['timestamp'])) {
             throw new Exception('Timestamp not set');
+        }
+
+        if (!is_int($json['timestamp'])) {
+            throw new Exception('Timestamp is not an integer');
         }
 
         $ext = pathinfo($filename, PATHINFO_EXTENSION);

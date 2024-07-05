@@ -8,7 +8,7 @@ def encrypt
     base64_key = "v4gaj6ELt8p5+aLuBeNbRW45BAkHQzAfC2sExq1Elr4="
     key = Base64.decode64(base64_key)
 
-    # Data to encrypt (similar to JavaScript object)
+    # Data to encrypt
     data = {
         timestamp: Time.now.to_i,
         page_id: "my-page-rb"

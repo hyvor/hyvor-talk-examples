@@ -18,6 +18,8 @@ function runFile(string $filename)
         exec("dotnet script $filename", $output);
     } else if ($extension === 'rb') {
         exec("ruby $filename", $output);
+    } else if ($extension === 'go') {
+        exec("go run $filename", $output);
     } else {
         throw new Exception('Unsupported file type');
     }

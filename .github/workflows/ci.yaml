@@ -51,6 +51,11 @@ jobs:
             - name: Install Dotnet Script
               run: dotnet tool install -g dotnet-script
 
+            - name: Install Ruby
+              uses: actions/setup-ruby@v1
+              with:
+                  ruby-version: "3.0"
+
             - name: Run tests
               run: |
                   php test.php

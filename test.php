@@ -16,6 +16,8 @@ function runFile(string $filename)
         exec("java -cp .:lib/org.json.jar $filename", $output);
     } else if ($extension === 'cs') {
         exec("dotnet script $filename", $output);
+    } else if ($extension === 'rb') {
+        exec("ruby $filename", $output);
     } else {
         throw new Exception('Unsupported file type');
     }

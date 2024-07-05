@@ -14,15 +14,15 @@ public class EncryptionUtils {
 
 
     public static String encrypt() {
-        /**
-        * This is the base64 encoded key from Console -> Settings -> API -> Encryption Key
-        * Ideally, this should be stored in a secure location and not in the codebase. ex: env variable
-        */
+        // This is the base64 encoded key from Console -> Settings -> API -> Encryption Key
+        // Ideally, this should be stored in a secure location and not in the codebase. ex: env variable
         String ENCRYPTION_KEY = "v4gaj6ELt8p5+aLuBeNbRW45BAkHQzAfC2sExq1Elr4=";
         byte[] key = Base64.getDecoder().decode(ENCRYPTION_KEY);
 
+        // create the JSON object
         JSONObject data = new JSONObject();
         data.put("timestamp", System.currentTimeMillis() / 1000); // Current UNIX timestamp in seconds
+        // add other data (depends on your use case)
         data.put("page-id", "my-page-id-3");
 
         String json = data.toString();
@@ -32,6 +32,7 @@ public class EncryptionUtils {
         new SecureRandom().nextBytes(iv);
 
         try {
+            // encrypt the data
             Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
             SecretKeySpec secretKeySpec = new SecretKeySpec(key, "AES");
             IvParameterSpec ivParameterSpec = new IvParameterSpec(iv);

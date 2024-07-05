@@ -14,6 +14,8 @@ function runFile(string $filename)
         exec("python3 $filename", $output);
     } else if ($extension === 'java') {
         exec("java -cp .:lib/org.json.jar $filename", $output);
+    } else if ($extension === 'cs') {
+        exec("dotnet script $filename", $output);
     } else {
         throw new Exception('Unsupported file type');
     }

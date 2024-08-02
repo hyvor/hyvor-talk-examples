@@ -58,7 +58,41 @@ function testEncryption()
 
 function testSso()
 {
-    // TODO
+
+    $files = glob(__DIR__ . '/sso/sso*');
+    $key = "sso_private_key";
+
+    echo "Testing SSO\n";
+
+    foreach ($files as $filename) {
+        $output = runFile($filename);
+
+        $json = json_decode($output, true);
+
+        $user = $json['user'];
+        $hash = $json['hash'];
+
+        $checkHash = hash_hmac('sha256', $user, $key);
+
+        if ($hash !== $checkHash) {
+            throw new Exception('Hash does not match');
+        }
+
+        $user = base64_decode($user);
+        $json = json_decode($user, true);
+
+        if (!isset($json['timestamp'])) {
+            throw new Exception('Timestamp not set');
+        }
+
+        if ($json['id'] !== 1) {
+            throw new Exception('ID does not match');
+        }
+
+        $ext = pathinfo($filename, PATHINFO_EXTENSION);
+        echo "$ext: Success\n";
+    }
+
 }
 
 
